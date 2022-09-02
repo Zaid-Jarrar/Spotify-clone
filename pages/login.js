@@ -9,13 +9,9 @@ function Login({ providers }) {
     
       {Object.values(providers).map((provider)=>(
         <div  key={provider.name}>
-           <button className="bg-[#18d860] text-white p-5 rounded-full" 
+           <button className="bg-[#18d860] text-white p-5 rounded-full mr-3" 
            // callback is for when i am signed in i will be redirected to home page
-            onClick={() => signIn(provider.id, { callbackUrl: "/" })}
-            
-            
-
-           >
+            onClick={() => signIn(provider.id, { callbackUrl: "/" })} >
             
             Login with {provider.name}
             </button> 

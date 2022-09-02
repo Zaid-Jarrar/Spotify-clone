@@ -2,17 +2,24 @@ import { useRecoilState } from "recoil"
 import useSpotify from "../hooks/useSpotify"
 import {currentTrackIdState,isPlayingState} from "../atoms/songAtom"
 import {millisToMinutesAndSeconds} from "../lib/time"
+
+
 function Song({order,track}) {
    const spotifyApi = useSpotify()
    const [currentTrackId,setCurrentTrackId] = useRecoilState(currentTrackIdState) 
    const [isPlaying,setIsPlaying] = useRecoilState(isPlayingState)
     
-   const playSong = () => {
+   const playSong = async () => {
     setCurrentTrackId(track.track.id)
+    console.log(track)
+    console.log(track.track.uri)
     setIsPlaying(true)
-    spotifyApi.play({
-        urls:[track.track.url],
+    spotifyApi.play ({
+        uris:[track.track.uri],
 
+    }).catch((err)=>{
+        alert("play spotify app and run a song then you are allowed to change from here")
+        console.log(err,"spotify app must run first in the background")
     })
 
    }
@@ -25,13 +32,13 @@ function Song({order,track}) {
             <p>{order+1}</p>
             <img className="h-10 w-10" src={track.track?.album?.images?.[0].url} alt="track image" />
             <div>
-                <p className="w-36 lg:w-64 text-white truncate" >{track.track.name}</p>
-                <p className="w-40" > {track.track.artists[0].name} </p>
+                <p className="w-36 lg:w-64 text-white truncate" >{track.track?.name}</p>
+                <p className="w-40" > {track.track?.artists[0].name} </p>
             </div>
         </div>
         <div className="flex items-center  justify-between ml-auto md:ml-0   "> 
-            <p className="hidden md:inline w-40" > {track.track.album.name} </p>
-            <p> {millisToMinutesAndSeconds(track.track.duration_ms)}</p>
+            <p className="hidden md:inline w-40" > {track.track?.album.name} </p>
+            <p> {millisToMinutesAndSeconds(track.track?.duration_ms)}</p>
         </div>
     </div>
   )
