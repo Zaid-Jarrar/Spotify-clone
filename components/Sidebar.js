@@ -30,7 +30,7 @@ function Sidebar() {
   }, [session, spotifyApi]);
 
   //   console.log(playlists);
-  console.log("Picked playlist Id >>>", playlistId);
+  // console.log("Picked playlist Id >>>", playlistId);
 
   return (
     <div className="text-gray-500 p-5 text-xs lg:text-sm border-r

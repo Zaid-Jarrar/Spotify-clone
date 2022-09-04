@@ -11,8 +11,8 @@ function Song({order,track}) {
     
    const playSong = async () => {
     setCurrentTrackId(track.track.id)
-    console.log(track)
-    console.log(track.track.uri)
+    // console.log(track)
+    // console.log(track.track.uri)
     setIsPlaying(true)
     spotifyApi.play ({
         uris:[track.track.uri],

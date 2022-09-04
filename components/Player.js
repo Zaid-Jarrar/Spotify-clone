@@ -27,7 +27,7 @@ function Player() {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [volume, setVolume] = useState(50);
   const songInfo = useSongInfo();
-  console.log(songInfo);
+  // console.log(songInfo);
 
   const fetchCurrentSong = () => {
     if (!songInfo) {
@@ -96,7 +96,9 @@ function Player() {
         <RewindIcon
           className="button"
           onClick={() => {
-            spotifyApi.skipToPrevious();
+            spotifyApi.skipToPrevious().catch(error =>  {
+              console.log(error)
+              alert("Previous is not yet implemented")});
           }}
         />
         {isPlaying ? (
@@ -108,7 +110,10 @@ function Player() {
         <FastForwardIcon
           className="button"
           onClick={() => {
-            spotifyApi.skipToNext();
+            spotifyApi.skipToNext().catch(error =>  {
+              console.log(error)
+              alert("Next is not yet implemented")});
+          ;
           }}
         />
         <ReplyIcon className="button" />
