@@ -5,7 +5,7 @@ import spotifyImg from "../public/spotify.png";
 function Login({ providers }) {
   return (
     <div className="flex flex-col items-center bg-black justify-center min-h-screen w-full">
-      <img className="w-52 mb-5" src={spotifyImg} alt="spotify img" />
+      <Image className="w-52 mb-5" src={spotifyImg} alt="spotify img" />
     
       {Object.values(providers).map((provider)=>(
         <div  key={provider.name}>
