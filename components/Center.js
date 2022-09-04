@@ -1,5 +1,4 @@
 import Songs from "../components/Songs"
-
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import {useState,useEffect} from "react"
@@ -35,7 +34,7 @@ function Center() {
     }).catch((err)=>{console.log("Something went wrong!! ",err)})
   },[spotifyApi,playlistId])
 
-  console.log(playlist)
+  // console.log(playlist)
 
 
   return (

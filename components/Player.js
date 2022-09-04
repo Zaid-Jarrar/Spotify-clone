@@ -27,12 +27,12 @@ function Player() {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [volume, setVolume] = useState(50);
   const songInfo = useSongInfo();
-  console.log(songInfo);
+  // console.log(songInfo);
 
   const fetchCurrentSong = () => {
     if (!songInfo) {
       spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-        console.log("Now playing: ", data.body?.item);
+        // console.log("Now playing: ", data.body?.item);
         setCurrentTrackId(data.body?.item?.id);
 
         spotifyApi.getMyCurrentPlaybackState().then((data) => {
@@ -96,7 +96,7 @@ function Player() {
         <RewindIcon
           className="button"
           onClick={() => {
-            spotifyApi.skipToPrevious();
+            spotifyApi.skipToPrevious().catch(error => {alert("Previous is not yet implemented")});
           }}
         />
         {isPlaying ? (
@@ -108,11 +108,12 @@ function Player() {
         <FastForwardIcon
           className="button"
           onClick={() => {
-            spotifyApi.skipToNext();
+           spotifyApi.skipToNext().catch(error => {alert("Next is not yet implemented")});
           }}
         />
         <ReplyIcon className="button" />
       </div>
+
       {/* right */}
       <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5 ">
         <VolumeDownIcon className="button" onClick={() => volume > 0 && setVolume(volume-10)} />

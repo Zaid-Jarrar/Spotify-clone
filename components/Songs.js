@@ -5,7 +5,7 @@ import Song from "./Song"
 
 function Songs() {
     const playlist = useRecoilValue(playlistState)
-    console.log(playlist)
+    // console.log(playlist)
     // ?. means if there is not any playlists
     
   return (
