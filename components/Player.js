@@ -96,7 +96,7 @@ function Player() {
         <RewindIcon
           className="button"
           onClick={() => {
-            spotifyApi.skipToPrevious().catch(error => {alert("Previous is not yet implemented")});
+            spotifyApi.skipToPrevious();
           }}
         />
         {isPlaying ? (
@@ -108,7 +108,7 @@ function Player() {
         <FastForwardIcon
           className="button"
           onClick={() => {
-           spotifyApi.skipToNext().catch(error => {alert("Next is not yet implemented")});
+           spotifyApi.skipToNext();
           }}
         />
         <ReplyIcon className="button" />
