@@ -4,7 +4,7 @@ import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import { millisToMinutesAndSeconds } from "../lib/time";
 
 function Song({ order, track }) {
-  const spotifyApi = useSpotify();
+  //   const spotifyApi = useSpotify();
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
@@ -13,14 +13,14 @@ function Song({ order, track }) {
     setCurrentTrackId(track.track.id);
 
     setIsPlaying(true);
-    spotifyApi
-      .play({
-        uris: [track.track.uri],
-      })
-      .catch((err) => {
-        // alert("play spotify app and run a song then you are allowed to change from here")
-        console.log(err, "spotify app must run first in the background");
-      });
+    // spotifyApi
+    //   .play({
+    //     uris: [track.track.uri],
+    //   })
+    //   .catch((err) => {
+    //     // alert("play spotify app and run a song then you are allowed to change from here")
+    //     console.log(err, "spotify app must run first in the background");
+    //   });
   };
 
   return (

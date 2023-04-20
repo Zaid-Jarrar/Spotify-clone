@@ -64,20 +64,20 @@ function Player() {
     }
   }, [currentTrackIdState, spotifyApi, session]);
 
-  useEffect(() => {
-    if (volume > 0 && volume < 100) {
-      debouncedAdjustVolume(volume);
-    }
-  }, [volume]);
+  // useEffect(() => {
+  //   if (volume > 0 && volume < 100) {
+  //     debouncedAdjustVolume(volume);
+  //   }
+  // }, [volume]);
   // callback used to wait 500 millsec before making a request to change the volume
-  const debouncedAdjustVolume = useCallback(
-    debounce((volume) => {
-      spotifyApi.setVolume(volume).catch((error) => {
-        error.message;
-      });
-    }, 500),
-    []
-  );
+  // const debouncedAdjustVolume = useCallback(
+  //   debounce((volume) => {
+  //     spotifyApi.setVolume(volume).catch((error) => {
+  //       error.message;
+  //     });
+  //   }, 500),
+  //   []
+  // );
 
   return (
     <div
@@ -129,7 +129,7 @@ function Player() {
       <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5 ">
         <VolumeDownIcon
           className="button"
-          onClick={() => volume > 0 && setVolume(volume - 10)}
+          // onClick={() => volume > 0 && setVolume(volume - 10)}
         />
         <input
           type="range"
