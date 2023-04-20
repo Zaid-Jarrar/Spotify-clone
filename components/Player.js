@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import {debounce} from "lodash"
+import { debounce } from "lodash";
 import {
   HeartIcon,
   VolumeUpIcon as VolumeDownIcon,
@@ -41,17 +41,20 @@ function Player() {
       });
     }
   };
-  
+
   const handlePlayPause = () => {
-    spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      if (data.body.is_playing) {
-        spotifyApi.pause();
-        setIsPlaying(false);
-      } else {
-        spotifyApi.play();
-        setIsPlaying(true);
-      }
-    });
+    // spotifyApi.getMyCurrentPlaybackState().then((data) => {
+    //   if (data.body.is_playing) {
+    //     spotifyApi.pause();
+    //     setIsPlaying(false);
+    //   } else {
+    //     spotifyApi.play();
+    //     setIsPlaying(true);
+    //   }
+    // });
+
+    // remove below when you uncomment the above code
+    setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {
@@ -62,15 +65,18 @@ function Player() {
   }, [currentTrackIdState, spotifyApi, session]);
 
   useEffect(() => {
-    if (volume > 0 && volume < 100){
-      debouncedAdjustVolume(volume)
+    if (volume > 0 && volume < 100) {
+      debouncedAdjustVolume(volume);
     }
-  },[volume])
+  }, [volume]);
   // callback used to wait 500 millsec before making a request to change the volume
   const debouncedAdjustVolume = useCallback(
     debounce((volume) => {
-      spotifyApi.setVolume(volume).catch((error)=>{error.message})
-    },500),[]
+      spotifyApi.setVolume(volume).catch((error) => {
+        error.message;
+      });
+    }, 500),
+    []
   );
 
   return (
@@ -95,11 +101,12 @@ function Player() {
         <SwitchHorizontalIcon className="button" />
         <RewindIcon
           className="button"
-          onClick={() => {
-            spotifyApi.skipToPrevious().catch(error =>  {
-              console.log(error)
-              alert("Previous is not yet implemented")});
-          }}
+          // onClick={() => {
+          //   spotifyApi.skipToPrevious().catch((error) => {
+          //     console.log(error);
+          //     alert("Previous is not yet implemented");
+          //   });
+          // }}
         />
         {isPlaying ? (
           <PauseIcon className="button w-10 h-10" onClick={handlePlayPause} />
@@ -109,29 +116,33 @@ function Player() {
 
         <FastForwardIcon
           className="button"
-          onClick={() => {
-            spotifyApi.skipToNext().catch(error =>  {
-              console.log(error)
-              alert("Next is not yet implemented")});
-          ;
-          }}
+          // onClick={() => {
+          //   spotifyApi.skipToNext().catch((error) => {
+          //     console.log(error);
+          //     alert("Next is not yet implemented");
+          //   });
+          // }}
         />
         <ReplyIcon className="button" />
       </div>
       {/* right */}
       <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5 ">
-        <VolumeDownIcon className="button" onClick={() => volume > 0 && setVolume(volume-10)} />
+        <VolumeDownIcon
+          className="button"
+          onClick={() => volume > 0 && setVolume(volume - 10)}
+        />
         <input
           type="range"
           value={volume}
           min={0}
           max={100}
-          onChange = {(e) => setVolume(Number(e.target.value))}
-
+          onChange={(e) => setVolume(Number(e.target.value))}
           className="w-14 md:w-28"
-
         />
-        <VolumeUpIcon className="button" onClick={() => volume < 100 && setVolume(volume + 10)} />
+        <VolumeUpIcon
+          className="button"
+          onClick={() => volume < 100 && setVolume(volume + 10)}
+        />
       </div>
     </div>
   );
